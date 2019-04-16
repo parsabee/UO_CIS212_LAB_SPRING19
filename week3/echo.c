@@ -2,8 +2,9 @@
  * Author: Parsa Bagheri
  * 
  * This is a complete implementation of the `echo' program
- * SYNOPSIS
- *			./echo [-neE] [string ...]
+ *
+ * SYNOPSIS:
+ *		./echo [-neE] [string ...]
  */
 
 #include <string.h>
@@ -54,6 +55,9 @@ void printe (char *string) {
 				case '0':
 					printf("%c", '\0');
 					break;
+				
+				/* this is not covering the \xHH and \0nnn cases */
+
 				default:
 					printf("\\%c", string[j+1]);
 					break;

@@ -114,9 +114,9 @@ int main (int argc, char *argv[]) {
 					b_flag = 1;
 				}
 				else {
-					/* if it's not the n or s flags, it can't be any other flag, so error */
+					/* if it's not the n or s or b flags, it can't be any other flag, so error */
 
-					fprintf (stderr, "scat: illegal option -- %c\n", argv[i][1]);
+					fprintf (stderr, "scat: illegal option -- %c\n", argv[i][j]);
 					fprintf (stderr, "%s\n", USAGE);
 					return 1;
 				}
