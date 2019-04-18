@@ -81,7 +81,7 @@ int main (int argc, char *argv[]) {
 	 * an integer, argc (argument count)
 	 * an array of char pointers (strings), argv(argument vector)
 	 *
-	 * in C and other compiled programming languages, your program has to alway have a starting point
+	 * in C and other compiled programming languages, your program has to always have a starting point
 	 * `main' is the starting function
 	 */
 
@@ -93,10 +93,13 @@ int main (int argc, char *argv[]) {
 		if (argv[i][0] == '-') {
 			/* it's a flag */
 
-			int len = strlen (argv[i]); /* getting the length of the argument at index i */
 			int j;
-			for (j = 1; j < len; j++) {
-
+			for (j = 1; argv[i][j] != '\0'; j++) {
+				/* notice the `ending condition' of the above for loop, 
+				 * your for loop doesn't necessarily end with a less than(<) condition,
+				 * in this case, we are ending the for loop when we reach a null terminating character '\0'
+				 */
+				
 				if (argv[i][j] == 'n') {
 					/* user has specified the n flag, setting the global n_flag */
 
@@ -111,9 +114,9 @@ int main (int argc, char *argv[]) {
 					b_flag = 1;
 				}
 				else {
-					/* if it's not the n or s flags, it can't be any other flag, so error */
+					/* if it's not the n or s or b flags, it can't be any other flag, so error */
 
-					fprintf (stderr, "scat: illegal option -- %c\n", argv[i][1]);
+					fprintf (stderr, "scat: illegal option -- %c\n", argv[i][j]);
 					fprintf (stderr, "%s\n", USAGE);
 					return 1;
 				}
@@ -153,7 +156,7 @@ int main (int argc, char *argv[]) {
 				 */
 
 				scat (fp); /* performing the scat function on the file */
-				fclose (fp); /* always close the file that you'version opened */
+				fclose (fp); /* always close the file that you've opened */
 			}
 
 			else {
