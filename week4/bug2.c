@@ -5,7 +5,7 @@
 /* This simple example program takes a word from the user as an argument passed on the 
    command line. It then takes the array of characters, allocates enough space on the 
    heap for the characters, and copies the array of characters onto the heap. After printing out
-   the string, the space on the stack is free'd. This example was used to illustrate valgrind's 
+   the string, the space on the heap is free'd. This example was used in class to illustrate valgrind's 
    basic functionality.
    */
 
