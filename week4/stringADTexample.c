@@ -18,7 +18,7 @@ int main(){
 	for(i = 0; i < al->size(al); i++){
 		char *s;
 		al->get(al, i, (void **)&s); // must cast &s to pointer to void pointer because that's what the get method accepts
-		printf("%s\n", s);
+		printf("%s\n", s); // prints each word from the original char pointer, str, on its own line with each character uppercased
 	}
 
 	st->destroy(st); // free up space used by st on heap
