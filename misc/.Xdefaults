@@ -1,0 +1,48 @@
+!after editing .Xdefaults it may be reloaded with:
+!xrdb -load ~/.Xdefaults
+
+xterm*VT100*geometry: 80x24
+xterm*font: -misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-1
+!xterm*background: white
+!xterm*foreground: black
+! special
+! special
+*.foreground:   #c5c8c6
+*.background:   #1b242d
+*.cursorColor:  #c5c8c6
+
+! black
+*.color0:       #282a2e
+*.color8:       #373b41
+
+! red
+*.color1:       #a54242
+*.color9:       #cc6666
+
+! green
+*.color2:       #8c9440
+*.color10:      #8d9733
+
+! yellow
+*.color3:       #de935f
+*.color11:      #f0c674
+
+! blue
+*.color4:       #5f819d
+*.color12:      #81a2be
+
+! magenta
+*.color5:       #85678f
+*.color13:      #b294bb
+
+! cyan
+*.color6:       #5e8d87
+*.color14:      #8abeb7
+
+! white
+*.color7:       #707880
+*.color15:      #c5c8c6
+
+xterm*VT100.Translations: #override\n\
+	Shift Ctrl <KeyPress> v: insert-selection(CLIPBOARD)\n\
+	Shift Ctrl <KeyPress> c: copy-selection(CLIPBOARD)\n
