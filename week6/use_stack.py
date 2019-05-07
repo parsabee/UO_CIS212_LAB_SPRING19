@@ -1,20 +1,25 @@
 import stack
 
 s1 = stack.Stack()
-s2 = stack.Stack()
 
-n = 5
-
-for i in range(n):
+for i in range(5):
 	s1.push(i)
 
-for i in range(n):
-	element = s1.pop()
-	print(element)
-	s2.push(element)
+def print_stack(s1):
+	s2 = stack.Stack()
+	while True:
+		element = s1.pop()
+		if element != None:
+			print(element)
+			s2.push(element)
+		else: break
+	
+	while True:
+		element = s2.pop()
+		if element != None:
+			s1.push(element)
+		else: break
 
-for i in range(n):
-	s1.push(s2.pop())
 
-for i in range(n):
-	print(s1.pop())
+print_stack(s1)
+print_stack(s1)
