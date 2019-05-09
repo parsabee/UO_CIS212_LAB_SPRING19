@@ -1,25 +1,27 @@
-import stack
+__author__ = 'Adam Noack'
+# using the stack ADT that we created
 
-s1 = stack.Stack()
+from stack import Stack
 
-for i in range(5):
-	s1.push(i)
-
-def print_stack(s1):
-	s2 = stack.Stack()
-	while True:
-		element = s1.pop()
-		if element != None:
-			print(element)
-			s2.push(element)
-		else: break
+def print_stack(stack_1):
+	stack_2 = Stack()
+	print ('Stack:')
+	element = stack_1.pop()
+	while element != None:
+		print ('+-------+')
+		print('|  {}\t|'.format(element))
+		print ('+-------+')
+		stack_2.push(element)
+		element = stack_1.pop()
 	
-	while True:
-		element = s2.pop()
-		if element != None:
-			s1.push(element)
-		else: break
+	element = stack_2.pop()
+	while element != None:
+		stack_1.push(element)
+		element = stack_2.pop()
 
+if __name__ == '__main__':
+	stack = Stack()
 
-print_stack(s1)
-print_stack(s1)
+	for i in range(50, 60):
+		stack.push(i)
+	print_stack(stack)
