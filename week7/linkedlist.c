@@ -86,13 +86,14 @@ static int _size (const LinkedList *ll) {
 }
 
 const LinkedList *LinkedList_create () {
+	LinkedList *_linkedlist = NULL;
 	Data *_data = (Data *)malloc (sizeof (Data));
 	if (_data != NULL) {
 		_data->head = NULL;
 		_data->tail = NULL;
 		_data->size = 0;
 
-		LinkedList *_linkedlist = (LinkedList *)malloc (sizeof (LinkedList));
+		_linkedlist = (LinkedList *)malloc (sizeof (LinkedList));
 		if (_linkedlist != NULL) {
 			_linkedlist->self = (void *)_data;
 			_linkedlist->addLast = _addLast;
@@ -103,9 +104,6 @@ const LinkedList *LinkedList_create () {
 			_linkedlist->size = _size;
 		} else 
 			free (_data);
-
-		return _linkedlist;
 	}
-	
-	return NULL;
+	return _linkedlist;
 }

@@ -1,0 +1,11 @@
+/*
+ * psuedo code for a lower function in c
+ */
+
+
+func lower (original_str, lower_str):
+	length = original_str.length
+	for ch in range(length):
+		lower_str[ch] = tolower(original_str)
+
+	/* don't forget the null terminating character */

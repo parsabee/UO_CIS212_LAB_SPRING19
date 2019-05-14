@@ -86,6 +86,19 @@ int main (int argc, char *argv[]) {
 	 */
 
 	FILE *fp = stdin;
+
+	/*
+	 *	for loops:
+	 *	syntax: 
+	 *			for (expr1; expr2; expr3) {
+	 *					statement;
+	 *			}
+	 *
+	 *	expr1, is the initial statement, when the forloop starts, expr1 gets evaluated
+	 *	expr2, is the condition that while it's true, the statement within forloop executes
+	 *	expr3, is the statement that executes at the end of a forloop
+	 */
+
 	int i;
 	for (i = 1; i < argc; i++) {
 		/* initialize i with 1 and not 0, because index 0 argv[0] is the name of the program */
@@ -95,9 +108,10 @@ int main (int argc, char *argv[]) {
 
 			int j;
 			for (j = 1; argv[i][j] != '\0'; j++) {
-				/* notice the `ending condition' of the above for loop, 
-				 * your for loop doesn't necessarily end with a less than(<) condition,
+				/* notice the `condition' expression of the above for loop (expr2), 
+				 * your for loop doesn't necessarily have to end with a less than(<) condition,
 				 * in this case, we are ending the for loop when we reach a null terminating character '\0'
+				 * in other words, the statements within the forloop execute, while expr2 is ture
 				 */
 				
 				if (argv[i][j] == 'n') {
