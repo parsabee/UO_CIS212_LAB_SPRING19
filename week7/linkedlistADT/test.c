@@ -42,5 +42,8 @@ int main (UNUSED int argc, UNUSED char *argv[]) {
 		printf ("%ld ", (long)array[i]);
 	printf ("\n");
 	free (array);
+	ll->clear (ll, NULL);
+	fprintf (stderr, "printing after clearing LinkedList:\n\t");	
+	printll(&ll, 0);
 	ll->destroy (ll, NULL);
 }

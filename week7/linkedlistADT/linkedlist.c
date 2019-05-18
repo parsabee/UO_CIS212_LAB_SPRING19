@@ -134,8 +134,7 @@ static void **_toArray (const LinkedList *ll, long *len) {
 	return array;
 }
 
-static void _destroy (const LinkedList *ll, void(*freeFxn)(void *element)) {
-	Data *_data = (Data *)ll->self;
+static void purge (Data *_data, void (*freeFxn)(void *element)) {
 	Node *curnode = _data->head;
 	while (curnode != NULL) {
 		Node *tmp = curnode->next;
@@ -144,6 +143,18 @@ static void _destroy (const LinkedList *ll, void(*freeFxn)(void *element)) {
 		free (curnode);
 		curnode = tmp;
 	}
+}
+
+static void _clear (const LinkedList *ll, void(*freeFxn)(void *element)) {
+	Data *_data = (Data *)ll->self;
+	purge (_data, freeFxn);
+	_data->size = 0;
+	_data->head = _data->tail = NULL;
+}
+
+static void _destroy (const LinkedList *ll, void(*freeFxn)(void *element)) {
+	Data *_data = (Data *)ll->self;
+	purge (_data, freeFxn);
 	free (_data);
 	free ((void *)ll);
 }
@@ -172,6 +183,7 @@ const LinkedList *LinkedList_create () {
 			_linkedlist->removeFirst = _removeFirst;
 			_linkedlist->size = _size;
 			_linkedlist->toArray = _toArray;
+			_linkedlist->clear = _clear;
 			_linkedlist->destroy = _destroy;
 		} else 
 			free (_data);

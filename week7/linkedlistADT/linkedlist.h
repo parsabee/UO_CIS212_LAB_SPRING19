@@ -23,7 +23,7 @@ struct linkedlist {
 		int (*removeFirst) (const LinkedList *ll, void **element);
 		int (*size) (const LinkedList *ll);
 		void **(*toArray)(const LinkedList *ll, long *len);
-		//\int (*clear) (const LinkedList *ll, void (*freeFxn)(void *element));
+		void (*clear) (const LinkedList *ll, void(*freeFxn)(void *element));
 		void (*destroy) (const LinkedList *ll, void(*freeFxn)(void *element));
 };
 
