@@ -19,7 +19,11 @@ struct linkedlist {
 		int (*addFirst) (const LinkedList *ll, void *element);
 		int (*getLast) (const LinkedList *ll, void **element);
 		int (*getFirst) (const LinkedList *ll, void **element);
+		int (*removeLast) (const LinkedList *ll, void **element);
+		int (*removeFirst) (const LinkedList *ll, void **element);
 		int (*size) (const LinkedList *ll);
+		void **(*toArray)(const LinkedList *ll, long *len);
+		//\int (*clear) (const LinkedList *ll, void (*freeFxn)(void *element));
 		void (*destroy) (const LinkedList *ll, void(*freeFxn)(void *element));
 };
 

@@ -11,7 +11,6 @@ typedef struct linkedlist_node Node;
 struct linkedlist_node {
 	void *data;
 	Node *next;
-	Node *prev;
 };
 
 typedef struct linkedlist_data {
@@ -24,11 +23,15 @@ static int _addLast (const LinkedList *ll, void *element) {
 	Data *_data = (Data *)ll->self;
 	Node *node = (Node *)malloc (sizeof (Node));
 	if (node != NULL) {
-		node -> data = element;
-		node -> prev = _data -> tail;
-		node -> next = NULL;
-		_data -> tail = node;
-		_data -> size ++;
+		node->data = element;
+		node->next = NULL;
+		if (_data->size == 0)
+			_data->head = _data->tail = node;
+		else {
+			_data->tail->next = node;
+			_data->tail = node;	
+		}
+		_data->size++;
 		return 1;
 	}
 	return 0;
@@ -38,11 +41,16 @@ static int _addFirst (const LinkedList *ll, void *element) {
 	Data *_data = (Data *)ll->self;
 	Node *node = (Node *)malloc (sizeof (Node));
 	if (node != NULL) {
-		node -> data = element;
-		node -> prev = NULL;
-		node -> next = _data->head;
-		_data -> head = node;
-		_data -> size ++;
+		node->data = element;
+		if (_data->size == 0){
+			_data->head = _data->tail = node;
+			node->next = NULL;
+		}
+		else{ 
+			node->next = _data->head;
+			_data->head = node;
+		}
+		_data->size++;
 		return 1;
 	}
 	return 0;
@@ -68,6 +76,64 @@ static int _getFirst (const LinkedList *ll, void **element) {
 	return 0;
 }
 
+static int _removeLast (const LinkedList *ll, void **element) {
+	Data *_data = (Data *)ll->self;
+	if (!_data->size){
+		*element = NULL;
+		return 0;
+	}
+
+	Node *tmp, *prev = NULL; 
+	for (tmp = _data->head; tmp->next != NULL; tmp = tmp->next)
+		prev = tmp;
+
+	*element = tmp->data;
+	if (prev != NULL){
+		prev->next = tmp->next;
+		_data->tail = prev;
+	}
+	else 
+		_data->head = _data->tail = NULL;
+	
+	_data->size--;
+	free(tmp);
+	return 1;
+}
+
+static int _removeFirst (const LinkedList *ll, void **element) {
+	Data *_data = (Data *)ll->self;
+	if (!_data->size){
+		*element = NULL;
+		return 0;
+	}
+
+	Node *tmp = _data->head->next;
+       	*element = _data->head->data;
+	free (_data->head);
+	if (tmp == NULL)
+		_data->head = _data->tail = NULL;
+	else 
+		_data->head = tmp;	
+	_data->size--;
+	return 1;
+}
+
+static void **_toArray (const LinkedList *ll, long *len) {
+	Data *_data = (Data *)ll->self;
+	*len = 0;
+	if (!_data->size) 
+		return NULL;
+	
+	void **array = (void **)malloc (sizeof(void *) *(_data->size));
+	if (array) {
+		*len = _data->size;
+		long i = 0;
+		for (Node *tmp = _data->head; tmp != NULL; tmp = tmp->next)
+			array[i++] = tmp->data;
+	}
+	return array;
+}
+
 static void _destroy (const LinkedList *ll, void(*freeFxn)(void *element)) {
 	Data *_data = (Data *)ll->self;
 	Node *curnode = _data->head;
@@ -78,6 +144,8 @@ static void _destroy (const LinkedList *ll, void(*freeFxn)(void *element)) {
 		free (curnode);
 		curnode = tmp;
 	}
+	free (_data);
+	free ((void *)ll);
 }
 
 static int _size (const LinkedList *ll) {
@@ -98,10 +166,13 @@ const LinkedList *LinkedList_create () {
 			_linkedlist->self = (void *)_data;
 			_linkedlist->addLast = _addLast;
 			_linkedlist->addFirst = _addFirst;
-			_linkedlist->destroy = _destroy;
-			_linkedlist->getFirst = _getFirst;
 			_linkedlist->getLast = _getLast;
+			_linkedlist->getFirst = _getFirst;
+			_linkedlist->removeLast = _removeLast;
+			_linkedlist->removeFirst = _removeFirst;
 			_linkedlist->size = _size;
+			_linkedlist->toArray = _toArray;
+			_linkedlist->destroy = _destroy;
 		} else 
 			free (_data);
 	}

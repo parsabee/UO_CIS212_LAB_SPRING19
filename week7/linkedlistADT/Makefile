@@ -2,12 +2,12 @@ SOURCES = $(wildcard *.c)
 OBJECTS = $(addsuffix .o, $(basename $(SOURCES)))
 CFLAGS = -W -Wall -g
 CC = gcc
-TARGETS = main
+TARGETS = test
 RM = rm -rf
 
 all: $(TARGETS)
 
-main: $(OBJECTS)
+test: $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 %.o: %.c
