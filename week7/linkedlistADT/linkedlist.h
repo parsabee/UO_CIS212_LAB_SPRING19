@@ -1,7 +1,7 @@
 /*
  * author: Parsa Bagheri
  * linkelist.h
- * a simple doubly linked list implementation
+ * a simple singly linked list implementation
  */
 
 #ifndef LINKEDLIST_H
