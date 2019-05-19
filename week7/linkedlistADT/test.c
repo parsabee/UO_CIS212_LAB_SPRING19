@@ -24,6 +24,9 @@ void printll (const LinkedList **ll, int backwards) {
 
 int main (UNUSED int argc, UNUSED char *argv[]) {
 	const LinkedList *ll = LinkedList_create ();
+	if (ll == NULL)
+		return 0;
+	
 	long arr [] = {1L, 2L, 3L, 4L};
 	for (int i = 0; i < 4; i++)
 		ll->addLast (ll, (void *)arr [i]);
@@ -35,12 +38,16 @@ int main (UNUSED int argc, UNUSED char *argv[]) {
 	fprintf (stderr, "calling toArray method on LinkedList:\n");	
 	long len;
 	void **array = ll->toArray (ll, &len);
-	for (long i = 0; i < len; i++)
-		printf ("%ld ", (long)array[i]);
-	printf ("\n");
-	free (array);
+	if (array != NULL) {
+		for (long i = 0; i < len; i++)
+			printf ("%ld ", (long)array[i]);
+		printf ("\n");
+		free (array);
+	}
 	ll->clear (ll, NULL);
 	fprintf (stderr, "printing after clearing LinkedList:\n");	
 	printll(&ll, 0);
 	ll->destroy (ll, NULL);
+
+	return 1;
 }
