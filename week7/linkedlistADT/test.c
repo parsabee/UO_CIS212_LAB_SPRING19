@@ -25,7 +25,7 @@ void printll (const LinkedList **ll, int backwards) {
 int main (UNUSED int argc, UNUSED char *argv[]) {
 	const LinkedList *ll = LinkedList_create ();
 	if (ll == NULL)
-		return 0;
+		return 1;
 	
 	long arr [] = {1L, 2L, 3L, 4L};
 	for (int i = 0; i < 4; i++)
@@ -49,5 +49,5 @@ int main (UNUSED int argc, UNUSED char *argv[]) {
 	printll(&ll, 0);
 	ll->destroy (ll, NULL);
 
-	return 1;
+	return 0;
 }
