@@ -83,9 +83,11 @@ static int _removeLast (const LinkedList *ll, void **element) {
 		return 0;
 	}
 
-	Node *tmp, *prev = NULL; 
-	for (tmp = _data->head; tmp->next != NULL; tmp = tmp->next)
-		prev = tmp;
+	/* traversing the linkedlist head to tail, 
+	 * getting a reference to tail's previous node
+	 */
+	Node *tmp, *prev; 
+	for (tmp = _data->head, prev = NULL; tmp->next != NULL; prev = tmp, tmp = tmp->next); 
 
 	*element = tmp->data;
 	if (prev != NULL){
