@@ -104,9 +104,7 @@ int main (UNUSED int argc, UNUSED char *argv[]) {
 	fprintf (stderr, "[SUCCESS]: pop_back() and pop_front()\n");
 
 clean_up:
-	//with free
 	deque1->destroy (deque1, NULL);
-	//without free, because the elements in deque2 were the same as the elements in deque1, and we've already freed them
 	deque2->destroy (deque2, NULL);	
 	fprintf (stderr, "[SUCCESS]: destroy(NULL), no segmentaion fault, run with valgrind for memory report\n");
 	deque3->destroy (deque3, free);
